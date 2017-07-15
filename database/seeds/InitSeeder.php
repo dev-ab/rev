@@ -10,7 +10,7 @@ class InitSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $user = \App\User::create(['name' => 'abdou', 'email' => 'abdulrahman@toptal.com', 'password' => bcrypt('abdou')]);
+        $user = \App\User::create(['name' => 'abdou', 'username' => 'abdou', 'phone' => '', 'image' => '', 'email' => 'abdulrahman@toptal.com', 'password' => bcrypt('abdou')]);
         $role = \App\Role::create(['name' => 'admin', 'display_name' => 'Administrator', 'description' => 'A system administrator']);
         $user->attachRole($role);
     }

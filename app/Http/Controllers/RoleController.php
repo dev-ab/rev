@@ -36,14 +36,22 @@ class RoleController extends Controller {
         $msg = ['status' => 'nothing'];
         $role = \App\Role::find($id);
 
+        $data = $request->all();
+
+        print_r($data);
+        
+        if (isset($data['name']))
+            $data['name'] = strtolower(str_replace(' ', '_', $data['name']));
+
+
         $perms = is_array($request->input('perms')) ? $request->input('perms') : [];
 
         if ($id == 'null') {
-            $role = \App\Role::create($request->all());
+            $role = \App\Role::create($data);
             $role->perms()->sync($perms);
             $msg = ['status' => 'created'];
         } else if ($role && $role->name != 'admin') {
-            $role->update($request->all());
+            $role->update($data);
             $role->perms()->sync($perms);
             $msg = ['status' => 'updated'];
         }
