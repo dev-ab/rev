@@ -51,7 +51,7 @@
                                     <th>نوع الشركة / المؤسسة</th>
                                     <th>المعاملة الزكوية</th>
                                     <th>رقم الهاتف</th>
-                                    <th></th>
+                                    <th style="width: 12%"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,7 +72,7 @@
                                     <td class="v-align-middle">
                                         <p>{{$client->contacts[0]->data}}</p>
                                     </td>
-                                    <td style="width: 10%">
+                                    <td>
                                         <a class="btn btn-success" href="/client/edit/{{$client->id}}" title="تعديل"><i class="fa fa-pencil"></i></a>
                                         <a class="btn btn-danger" href="#" onclick="confirmDel({{$client->id}})" title="حذف"><i class="fa fa-trash"></i></a>
                                     </td>
