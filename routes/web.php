@@ -58,3 +58,4 @@ Route::get('/task/delete/{id}', 'TaskController@delete');
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+Route::get('att/{path?}', 'HomeController@file')->where('path', '(.*)');
