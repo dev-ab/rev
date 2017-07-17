@@ -16,7 +16,7 @@ class CreateContactsTable extends Migration {
             $table->increments('id');
             $table->integer('owner_id')->unsigned();
             $table->text('owner_type');
-            $table->enum('type', ['email', 'phone', 'address', 'fb', 'tw', 'ln']);
+            $table->enum('type', ['email', 'phone', 'address', 'fax', 'website']);
             $table->string('data');
             $table->tinyInteger('default');
             $table->timestamps();

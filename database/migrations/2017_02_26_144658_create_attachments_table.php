@@ -21,7 +21,7 @@ class CreateAttachmentsTable extends Migration {
             $table->text('path');
             $table->string('ref');
             $table->string('type');
-            $table->string('sizeKB');
+            $table->float('sizeKB');
             $table->timestamps();
         });
     }

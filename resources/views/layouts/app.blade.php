@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ config('app.locale')}}" ng-app="MyApp">
     <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <meta charset="utf-8" />
@@ -9,21 +9,30 @@
         <link rel="apple-touch-icon" sizes="76x76" href="{{url('/')}}/pages/ico/76.png">
         <link rel="apple-touch-icon" sizes="120x120" href="{{url('/')}}/pages/ico/120.png">
         <link rel="apple-touch-icon" sizes="152x152" href="{{url('/')}}/pages/ico/152.png">
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="{{url('/')}}/favicon.ico" />
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-touch-fullscreen" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
         <meta content="" name="description" />
         <meta content="" name="author" />
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="csrf-token" content="{{ csrf_token()}}">
         <link href="{{url('/')}}/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="{{url('/')}}/assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="{{url('/')}}/assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-        <link href="{{url('/')}}/pages/css/pages-icons.css" rel="stylesheet" type="text/css">
-        <link class="main-stylesheet" href="{{url('/')}}/pages/css/pages.css" rel="stylesheet" type="text/css" />
+
+
+        <link href="{{url('/')}}/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{url('/')}}/assets/plugins/bootstrap-tag/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
+        <link href="{{url('/')}}/assets/plugins/dropzone/css/dropzone.css" rel="stylesheet" type="text/css" />
+        <link href="{{url('/')}}/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="{{url('/')}}/assets/plugins/summernote/css/summernote.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="{{url('/')}}/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="{{url('/')}}/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" media="screen">
+
+        <link class="main-stylesheet" href="{{url('/')}}/pages/css/pages-icons.css" rel="stylesheet" type="text/css" />
         <link class="main-stylesheet" href="{{url('/')}}/pages/css/pages.rtl.css" rel="stylesheet" type="text/css" />
         <!--[if lte IE 9]>
             <link href="{{url('/')}}/pages/css/ie9.css" rel="stylesheet" type="text/css" />
@@ -120,13 +129,13 @@
                     </li>
 
                     <li class="">
-                        <a href="{{ route('logout') }}"
+                        <a href="{{ route('logout')}}"
                            onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();" class="detailed">
                             <span class="title">تسجيل خروج</span>
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
+                        <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
+                            {{ csrf_field()}}
                         </form>
                         <span class="icon-thumbnail">T</span>
                     </li>
@@ -163,12 +172,29 @@
         <script type="text/javascript" src="{{url('/')}}/assets/plugins/bootstrap-select2/select2.min.js"></script>
         <script type="text/javascript" src="{{url('/')}}/assets/plugins/classie/classie.js"></script>
         <script src="{{url('/')}}/assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-        <script src="{{url('/')}}/assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
         <!-- END VENDOR JS -->
+
+        <script src="{{url('/')}}/assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+        <script type="text/javascript" src="{{url('/')}}/assets/plugins/jquery-autonumeric/autoNumeric.js"></script>
+        <script type="text/javascript" src="{{url('/')}}/assets/plugins/dropzone/dropzone.min.js"></script>
+        <script type="text/javascript" src="{{url('/')}}/assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"></script>
+        <script type="text/javascript" src="{{url('/')}}/assets/plugins/jquery-inputmask/jquery.inputmask.min.js"></script>
+        <script src="{{url('/')}}/assets/plugins/boostrap-form-wizard/js/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
+        <script src="{{url('/')}}/assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="{{url('/')}}/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="{{url('/')}}/assets/plugins/summernote/js/summernote.min.js" type="text/javascript"></script>
+        <script src="{{url('/')}}/assets/plugins/moment/moment.min.js"></script>
+        <script src="{{url('/')}}/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="{{url('/')}}/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+
+        @include('layouts.footer')
+
 
         <script src="{{url('/')}}/pages/js/pages.min.js"></script>
 
         @yield('js')
+
+
 
     </body>
 </html>

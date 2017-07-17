@@ -158,6 +158,7 @@ return [
          * Vendors
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
+        \Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
     ],
     /*
       |--------------------------------------------------------------------------
@@ -205,5 +206,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'JavaScript' => Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
     ],
 ];

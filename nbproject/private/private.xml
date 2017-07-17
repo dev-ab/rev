@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/rev/resources/views/client.blade.php</file>
+            <file>file:/C:/xampp/htdocs/rev/resources/views/layouts/app.blade.php</file>
+            <file>file:/C:/xampp/htdocs/rev/routes/web.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/Http/Controllers/UserController.php</file>
+            <file>file:/C:/xampp/htdocs/rev/public/js/controllers/ClientController.js</file>
+            <file>file:/C:/xampp/htdocs/rev/database/migrations/2017_02_26_144658_create_attachments_table.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/Http/Controllers/ClientController.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/Attachment.php</file>
+            <file>file:/C:/xampp/htdocs/rev/public/js/myapp.js</file>
+            <file>file:/C:/xampp/htdocs/rev/app/Contact.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/Client.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/Partner.php</file>
+        </group>
     </open-files>
 </project-private>

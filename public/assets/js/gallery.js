@@ -4,7 +4,7 @@
  * For DEMO purposes only. Extract what you need.
  * ============================================================ */
 
-$(function() {
+$(function () {
 
     /* GRID
     -------------------------------------------------------------*/
@@ -14,14 +14,14 @@ $(function() {
         Isotope plugin. 
     */
     var $gallery = $('.gallery');
-    $gallery.imagesLoaded(function() {
+    $gallery.imagesLoaded(function () {
         applyIsotope();
     });
 
     /*  Apply Isotope plugin 
         isotope.metafizzy.co
     */
-    var applyIsotope = function() {
+    var applyIsotope = function () {
         $gallery.isotope({
             itemSelector: '.gallery-item',
             masonry: {
@@ -31,7 +31,7 @@ $(function() {
             }
         });
     }
-    
+
     /*
         Show a sliding item using MetroJS
         http://www.drewgreenwell.com/projects/metrojs
@@ -39,14 +39,14 @@ $(function() {
     $(".live-tile,.flip-list").liveTile();
 
 
-     /* DETAIL VIEW
+    /* DETAIL VIEW
     -------------------------------------------------------------*/
 
     /*
         Toggle detail view using DialogFx
         http://tympanus.net/Development/DialogEffects/
     */
-    $('body').on('click', '.gallery-item', function() {
+    $('body').on('click', '.gallery-item', function () {
         var dlg = new DialogFx($('#itemDetails').get(0));
         dlg.toggle();
     });
@@ -55,7 +55,7 @@ $(function() {
         Look for data-image attribute and apply those
         images as CSS background-image 
     */
-    $('.item-slideshow > div').each(function() {
+    $('.item-slideshow > div').each(function () {
         var img = $(this).data('image');
         $(this).css({
             'background-image': 'url(' + img + ')',
@@ -69,16 +69,16 @@ $(function() {
     */
     $(".item-slideshow").owlCarousel({
         items: 1,
-        nav: true,
-        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
-        dots: true
+        nav: false,
+        navText: ['<i class="fa fa-chevron-right"></i>', '<i class="fa fa-chevron-left"></i>'],
+        dots: false
     });
 
 
-     /* FILTERS OVERLAY
+    /* FILTERS OVERLAY
     -------------------------------------------------------------*/
 
-    $('[data-toggle="filters"]').click(function() {
+    $('[data-toggle="filters"]').click(function () {
         $('#filters').toggleClass('open');
     });
 
