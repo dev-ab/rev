@@ -83,17 +83,11 @@
                             <span class=" arrow"></span></a>
                         <span class="icon-thumbnail">M</span>
                         <ul class="sub-menu">
-                            <li class="">
+                            <!--<li class="">
                                 <a href='{{url('task')}}' class="detailed">
                                     <span class="title">المهام</span>
                                 </a>
                                 <span class="icon-thumbnail">T</span>
-                            </li>
-                            <li class="">
-                                <a href='{{url('client')}}' class="detailed">
-                                    <span class="title">العملاء</span>
-                                </a>
-                                <span class="icon-thumbnail">C</span>
                             </li>
                             <li class="">
                                 <a href='{{url('group')}}' class="detailed">
@@ -112,18 +106,60 @@
                                     <span class="title">التصنيفات</span>
                                 </a>
                                 <span class="icon-thumbnail">C</span>
+                            </li>-->
+                            <li class="">
+                                <a href='javascript:;' class="detailed">
+                                    <span class="title">العملاء</span>
+                                </a>
+                                <span class="icon-thumbnail">C</span>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{{url('client/create')}}">
+                                            <span><i class="fa fa-user-plus"></i> انشاء عميل</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('client')}}">
+                                            <span><i class="fa fa-users"></i> عرض العملاء</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="">
-                                <a href='{{url('user')}}' class="detailed">
+                                <a href='javascript:;' class="detailed">
                                     <span class="title">الموظفين</span>
                                 </a>
                                 <span class="icon-thumbnail">E</span>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{{url('user')}}">
+                                            <span><i class="fa fa-user-plus"></i> انشاء موظف</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('users-view')}}">
+                                            <span><i class="fa fa-users"></i> عرض الموظفين</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="">
-                                <a href='{{url('role')}}' class="detailed">
+                                <a href='javascript:;' class="detailed">
                                     <span class="title">الصلاحيات</span>
                                 </a>
                                 <span class="icon-thumbnail">E</span>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{{url('role')}}">
+                                            <span><i class="fa fa-plus-circle"></i> انشاء مجموعة صلاحيات</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('roles-view')}}">
+                                            <span><i class="fa fa-eye"></i> عرض الصلاحيات</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>

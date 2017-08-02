@@ -11,10 +11,13 @@ class RoleController extends Controller {
     }
 
     public function index() {
-
-        $roles = \App\Role::where('name', '!=', 'admin')->get();
         $perms = \App\Permission::all();
-        return view('role', compact('roles', 'perms'));
+        return view('role', compact('perms'));
+    }
+
+    public function view() {
+        $roles = \App\Role::where('name', '!=', 'admin')->get();
+        return view('roles-view', compact('roles'));
     }
 
     public function edit($id) {
@@ -39,7 +42,7 @@ class RoleController extends Controller {
         $data = $request->all();
 
         print_r($data);
-        
+
         if (isset($data['name']))
             $data['name'] = strtolower(str_replace(' ', '_', $data['name']));
 
@@ -72,7 +75,7 @@ class RoleController extends Controller {
             $msg = ['status' => 'deleted'];
         }
 
-        return redirect()->action('RoleController@index')->with($msg);
+        return redirect()->action('RoleController@view')->with($msg);
     }
 
 }

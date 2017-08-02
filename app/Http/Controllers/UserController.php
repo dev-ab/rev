@@ -12,14 +12,16 @@ class UserController extends Controller {
     }
 
     public function index() {
+        $roles = \App\Role::where('name', '!=', 'admin')->get();
+        return view('user', compact('roles'));
+    }
 
+    public function view() {
         $users = \App\User::whereHas('roles', function($q) {
                     $q->where('name', '!=', 'admin');
                 })->get();
 
-        $roles = \App\Role::where('name', '!=', 'admin')->get();
-
-        return view('user', compact('users', 'roles'));
+        return view('users-view', compact('users'));
     }
 
     public function edit($id) {

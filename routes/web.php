@@ -13,12 +13,14 @@
 
 //Role management
 Route::get('/role', 'RoleController@index');
+Route::get('/roles-view', 'RoleController@view');
 Route::get('/role/edit/{id}', 'RoleController@edit');
 Route::post('/role/save', 'RoleController@save');
 Route::get('/role/delete/{id}', 'RoleController@delete');
 
 //User management
 Route::get('/user', 'UserController@index');
+Route::get('/users-view', 'UserController@view');
 Route::get('/user/edit/{id}', 'UserController@edit');
 Route::post('/user/save', 'UserController@save');
 Route::get('/user/delete/{id}', 'UserController@delete');

@@ -117,56 +117,6 @@
                                 </form>
                             </div>
 
-                            <div class="col-xs-12">
-                                <br>
-                                <!-- START PANEL -->
-                                <div class="panel" style="margin-top:36px;">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>استعراض وتعديل مجموعات الصلاحيات</h5>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="panel-body">
-
-
-
-
-                                        <div class="table-responsive">
-                                            <div id="condensedTable_wrapper" class="dataTables_wrapper form-inline no-footer">
-                                                <table class="table  table-condensed dataTable no-footer" id="condensedTable" role="grid">
-                                                    <thead>
-                                                        <tr role="row">
-                                                            <th style="width:25%" class="sorting" tabindex="0" aria-controls="condensedTable" rowspan="1" colspan="1">اسم مجموعة الصلاحيات بالعربية</th>
-                                                            <th style="width:25%" class="sorting_asc" tabindex="0" aria-controls="condensedTable" rowspan="1" colspan="1">اسم مجموعة الصلاحيات بالانجليزية</th>
-                                                            <th style="width:30%" class="sorting" tabindex="0" aria-controls="condensedTable" rowspan="1" colspan="1">وصف مجموعة الصلاحيات</th>
-                                                            <th style="width:20%" class="sorting" tabindex="0" aria-controls="condensedTable" rowspan="1" colspan="1">التحكم بمجموعة الصلاحيات</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-
-                                                        @foreach($roles as $role)
-                                                        <tr>
-                                                            <td class="v-align-middle semi-bold">{{$role->display_name}}</td>
-                                                            <td class="v-align-middle sorting_1">{{ucwords(str_replace('_', ' ',$role->name))}}</td>
-                                                            <td class="v-align-middle semi-bold">{{$role->description}}</td>
-                                                            <td style="text-align: center">
-                                                                <a onclick="confirmDel(event)" href="{{url('role/delete/' . $role->id)}}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
-                                                                <a href="{{url('role/edit/' . $role->id)}}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END PANEL -->
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -178,17 +128,4 @@
     </div>
     <!-- END PAGE CONTENT WRAPPER -->
 </div>
-@endsection
-
-
-@section('js')
-<script>
-    function confirmDel(e) {
-        console.log(e)
-        console.log('here');
-        e.preventDefault();
-        if (confirm('هل انت متأكد من الحذف؟'))
-            window.location = e.target.href;
-    }
-</script>
 @endsection
