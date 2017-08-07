@@ -53,7 +53,7 @@ Route::get('/client/delete/{id}', 'ClientController@delete');
 Route::get('/client/del-att/{id}', 'ClientController@delete_att');
 
 //Program management
-Route::get('/program', 'programController@index');
+Route::get('/program', 'ProgramController@index');
 Route::get('/program/create', 'ProgramController@create');
 Route::get('/program/edit/{id}', 'ProgramController@edit');
 Route::post('/program/save', 'ProgramController@save');
