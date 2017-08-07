@@ -109,6 +109,42 @@
                             </li>-->
                             <li class="">
                                 <a href='javascript:;' class="detailed">
+                                    <span class="title">مجموعات الخيارات</span>
+                                </a>
+                                <span class="icon-thumbnail">G</span>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{{url('group/create')}}">
+                                            <span><i class="fa fa-plus-circle"></i> انشاء مجموعة</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('group')}}">
+                                            <span><i class="fa fa-list-ul"></i> عرض المجموعات</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href='javascript:;' class="detailed">
+                                    <span class="title">برامج المراجعه</span>
+                                </a>
+                                <span class="icon-thumbnail">P</span>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{{url('program/create')}}">
+                                            <span><i class="fa fa-plus-circle"></i> انشاء برنامج</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('program')}}">
+                                            <span><i class="fa fa-list-ol"></i> عرض البرامج</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href='javascript:;' class="detailed">
                                     <span class="title">العملاء</span>
                                 </a>
                                 <span class="icon-thumbnail">C</span>

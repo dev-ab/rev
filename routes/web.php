@@ -39,6 +39,7 @@ Route::get('/taskobj/delete/{id}', 'TaskObjectiveController@delete');
 
 //Group management
 Route::get('/group', 'GroupController@index');
+Route::get('/group/create', 'GroupController@create');
 Route::get('/group/edit/{id}', 'GroupController@edit');
 Route::post('/group/save', 'GroupController@save');
 Route::get('/group/delete/{id}', 'GroupController@delete');
@@ -50,6 +51,13 @@ Route::get('/client/edit/{id}', 'ClientController@edit');
 Route::post('/client/save', 'ClientController@save');
 Route::get('/client/delete/{id}', 'ClientController@delete');
 Route::get('/client/del-att/{id}', 'ClientController@delete_att');
+
+//Program management
+Route::get('/program', 'programController@index');
+Route::get('/program/create', 'ProgramController@create');
+Route::get('/program/edit/{id}', 'ProgramController@edit');
+Route::post('/program/save', 'ProgramController@save');
+Route::get('/program/delete/{id}', 'ProgramController@delete');
 
 //Task management
 Route::get('/task', 'TaskController@index');

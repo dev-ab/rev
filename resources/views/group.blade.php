@@ -1,12 +1,10 @@
 @extends('layouts/app')
 
-@section('title', 'مجموعات الأهداف')
+@section('title', 'إنشاء مجموعة خيارات لبرامج المراجعة')
 
 @section('content')
-
 <!-- START PAGE-CONTAINER -->
-<div class="page-container ">
-
+<div class="page-container" ng-controller="GroupController">
     <!-- START PAGE CONTENT WRAPPER -->
     <div class="page-content-wrapper ">
 
@@ -18,8 +16,10 @@
                 <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
                     <div class="inner">
 
-                        <h4 style="text-align:center;">تكوين مجموعات من اهداف المهام  </h4>
-
+                        <h4 ng-show="group" style="text-align:center;">تعديل مجموعة خيارات <span ng-bind='"(" + group.name + ")"'></span></h4>
+                        <h4 ng-hide="group" style="text-align:center;">إنشاء
+                            <span class="semi-bold">  مجموعة خيارات    </span> لبرامج المراجعة
+                        </h4>
                     </div>
                 </div>
             </div>
@@ -27,156 +27,120 @@
 
             <!-- START CONTAINER FLUID -->
             <div class="container-fluid container-fixed-lg">
+                <div ng-show="errors.length" class="row">
+                    <div class="alert alert-danger alert-dismissable col-md-6">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <ul>
+                            <li ng-repeat="error in errors" ng-bind="error"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="success" ng-show="success" class="row">
+                    <div class="alert alert-success alert-dismissable col-md-6">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        تم حفظ مجموعة الخيارات بنجاح</div>
+                </div>
                 <!-- BEGIN PlACE PAGE CONTENT HERE -->
-
-
-                <div class=" full-height sm-p-t-30">
-
+                <div class=" full-height sm-p-t-30 p-b-100">
                     <div class="container-sm-height full-height">
-
                         <div class="row row-sm-height">
-
-                            <div class='row'>
-                                <div class='col-md-6 col-md-offset-3'>
-                                    @if(session('status') == 'nothing')
-                                    <h5 class="alert alert-danger" style="text-align: center"> خطأ فى العملية</h5>
-                                    @elseif(session('status') == 'created')
-                                    <h5 class="alert alert-success" style="text-align: center">تم انشاء مجموعة الأهداف بنجاح</h5>
-                                    @elseif(session('status') == 'deleted')
-                                    <h5 class="alert alert-success" style="text-align: center">تم حذف مجموعة الأهداف بنجاح</h5>
-                                    @endif
-                                </div>
-                            </div>
                             <div class="col-xs-12">
-                                <form id="" class="p-t-15" role="form" method="post" action="{{url('group/save')}}">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="id" value="null">
+                                <form id="group_form" class="p-t-15" role="form" action="">
+                                    <input type="hidden" name="id" ng-value="id">
+
+                                    <!-- START PANEL -->
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div class="col-xs-12">
 
-                                                <h5>ادخل اسم 
-                                                    <span class="semi-bold">مجموعة الاهداف </span>
-                                                    الجديد للإنشاء
+                                                <h5>ادخل
+                                                    <span class="semi-bold">معلومات </span> مجموعة الخيارات
                                                 </h5>
                                                 <br>
                                             </div>
-                                            <div class="col-xs-12">
-
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group form-group-default">
-                                                            <label>اسم المجموعة</label>
-                                                            <input type="text" name="name" value="{{old('name')}}" placeholder="" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group form-group-default">
-                                                            <textarea name="description" class="form-control" style="min-height:110px;" placeholder="وصف المجموعة">{{old('description')}}</textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h4>اختر أهداف المهام</h4>
-                                                <div class="row">
-                                                    @foreach($objectives as $col)
-                                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                                        <h5>{{$col[0]->category->name}}</h5>
-                                                        @foreach($col as $obj)
-                                                        <div class="checkbox check-success">
-                                                            <input type="checkbox" name='objs[{{$obj->id}}]' {{old('objs')[$obj->id]? 'checked' : ''}} value='{{$obj->id}}' id="checkbox01">
-                                                            <label for="checkbox01">{{$obj->name}}</label>
-                                                        </div>
-                                                        @endforeach
-                                                    </div>
-                                                    @endforeach
-
+                                            <div class="col-sm-12">
+                                                <div class="form-group form-group-default">
+                                                    <label>اسم المجموعة</label>
+                                                    <input type="text" name="name" ng-value="group.name" placeholder="" class="form-control" required>
                                                 </div>
                                             </div>
-
                                             <div class="col-xs-12">
-                                                <button class="btn btn-primary btn-cons m-t-10" type="submit">إنشاء مجموعة اهداف   </button>
+                                                <div class="form-group form-group-default">
+                                                    <textarea name="description" ng-bind="group.description" class="form-control" style="min-height:60px;" placeholder="ملحوظات على المجموعة"></textarea>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <!-- END PANEL -->
+
+                                    <!-- START PANEL -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="col-xs-12">
+
+                                                <h5>اختر مجموعة من
+                                                    <span class="semi-bold">الخيارات </span> لحفظها واستخدامها فى انشاء المراجعات لاحقاً
+                                                </h5>
+                                                <br>
+                                            </div>
+
+
+
+                                            <div class="col-xs-12" ng-repeat="program in programs">
+                                                <div class="panel panel-default" data-pages="portlet">
+                                                    <div class="panel-heading separator">
+                                                        <div class="panel-title">
+                                                            <h4 class="text-primary semi-bold" ng-bind="program.name"></h4>
+                                                            <div class="checkbox check-success  ">
+                                                                <input ng-click="selectAll(program.id, $event)" type="checkbox" value="1" id="b@{{$index + 1}}">
+                                                                <label for="b@{{$index + 1}}">اختيار البرنامج بالكامل</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-controls">
+                                                            <ul>
+                                                                <li><a data-toggle="collapse" class="portlet-collapse" href="#"><i class="pg-arrow_maximize"></i></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="checkbox check-success" ng-repeat="obj in program.objs">
+                                                            <input name="objs[@{{program.id}}][]" ng-value="obj.id" type="checkbox" ng-checked="objs_ids.indexOf(obj.id) > -1" id="b@{{$parent.$index + 1}}@{{$index + 1}}">
+                                                            <label for="b@{{$parent.$index + 1}}@{{$index + 1}}" ng-bind="obj.description"></label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <a href="" ng-click="processGroup()" class="btn btn-primary btn-cons m-t-10">حفظ مجموعة الخيارات </a>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </form>
-                            </div>
-
-                            <div class="col-xs-12">
-                                <br>
-                                <!-- START PANEL -->
-                                <div class="panel" style="margin-top:36px;">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>استعراض وتعديل مجموعات المهام</h5>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="panel-body">
 
 
 
-
-                                        <div class="table-responsive">
-                                            <div id="condensedTable_wrapper" class="dataTables_wrapper form-inline no-footer">
-                                                <table class="table  table-condensed dataTable no-footer" id="condensedTable" role="grid">
-                                                    <thead>
-                                                        <tr role="row">
-                                                            <th style="width:10%" class="sorting" tabindex="0" aria-controls="condensedTable" rowspan="1" colspan="1">ID</th>
-                                                            <th style="width:20%" class="sorting_asc" tabindex="0" aria-controls="condensedTable" rowspan="1" colspan="1">اسم المجموعة</th>
-                                                            <th style="width:30%" class="sorting_asc" tabindex="0" aria-controls="condensedTable" rowspan="1" colspan="1">وصف المجموعة</th>
-                                                            <th style="width:15%" class="sorting" tabindex="0" aria-controls="condensedTable" rowspan="1" colspan="1">التحكم</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-
-                                                        @foreach($groups as $group)
-                                                        <tr role="row">
-                                                            <td class="v-align-middle semi-bold">{{$group->id}}</td>
-                                                            <td class="v-align-middle semi-bold">{{$group->name}}</td>
-                                                            <td class="v-align-middle semi-bold">{{$group->description}}</td>
-                                                            <td style="text-align: center">
-                                                                <a onclick="confirmDel(event)" href="{{url('group/delete/' . $group->id)}}" type="button" class="btn btn-danger "><i class="fa fa-trash-o"></i></a>
-                                                                <a href="{{url('group/edit/' . $group->id)}}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END PANEL -->
                             </div>
                         </div>
                     </div>
+                    <!-- END PLACE PAGE CONTENT HERE -->
                 </div>
-                <!-- END PLACE PAGE CONTENT HERE -->
+                <!-- END CONTAINER FLUID -->
             </div>
-            <!-- END CONTAINER FLUID -->
+
         </div>
         <!-- END PAGE CONTENT -->
 
     </div>
     <!-- END PAGE CONTENT WRAPPER -->
 </div>
+<!-- END PAGE-CONTAINER -->
 @endsection
 
-
 @section('js')
-<script>
-    function confirmDel(e) {
-        console.log(e)
-        console.log('here');
-        e.preventDefault();
-        if (confirm('هل انت متأكد من الحذف؟'))
-            window.location = e.target.href;
-    }
-</script>
+<script src="{{url('/')}}/js/angular.min.js" type="text/javascript"></script>
+<script src="{{url('/')}}/js/myapp.js" type="text/javascript"></script>
+<script src="{{url('/')}}/js/controllers/GroupController.js" type="text/javascript"></script>
 @endsection

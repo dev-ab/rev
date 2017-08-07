@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaskObjectivesTable extends Migration
+class CreateProgramsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateTaskObjectivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_objectives', function (Blueprint $table) {
+        Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id')->unsigned();
             $table->string('name');
-            $table->text('description');
-            $table->tinyInteger('constant');
+            $table->string('title');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateTaskObjectivesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_objectives');
+        Schema::dropIfExists('programs');
     }
 }
