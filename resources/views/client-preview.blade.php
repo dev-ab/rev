@@ -73,7 +73,8 @@
                                         <p>{{$client->contacts[0]->data}}</p>
                                     </td>
                                     <td style="width: 12%">
-                                        <a class="btn btn-success" href="/client/edit/{{$client->id}}" title="تعديل"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-info" href="/client/edit/{{$client->id}}" title="تعديل بيانات أساسيه"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-success" href="/client/{{$client->id}}/balance" title="تعديل بيانات ماليه"><i class="fa fa-dollar"></i></a>
                                         <a class="btn btn-danger" href="#" onclick="confirmDel({{$client->id}})" title="حذف"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>

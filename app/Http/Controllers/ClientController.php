@@ -27,6 +27,72 @@ class ClientController extends Controller {
         return view('client');
     }
 
+    public function balance($id) {
+        $client = \App\Client::with(['trialBalance.workPoint'])->findOrFail($id);
+
+        JavaScript::put([
+            'client' => $client,
+            'workPoints' => \App\WorkPoint::where(['level' => 1])
+                    ->with([
+                        'children.children.children',
+                        'children.children.children.trialBalance' => function($q) use($client) {
+                            return $q->where('client_id', $client->id);
+                        }])->get()
+        ]);
+
+        return view('balance');
+    }
+
+    public function balanceSave(Request $request, $id) {
+        $data = json_decode($request->input('data'), true);
+        $client = \App\Client::with('trialBalance')->findOrFail($id);
+        $ids = $client->trialBalance->pluck('work_point_id')->toArray();
+
+        $error = false;
+
+        foreach ($data as $p) {
+            if (in_array($p['id'], $ids)) {
+                unset($ids[array_search($p['id'], $ids)]);
+                $filtered = array_filter($p, function($v, $k) {
+                    if (in_array($k, ['initial_debit', 'initial_credit', 'move_debit', 'move_credit']) && $v)
+                        return true;
+                    return false;
+                }, ARRAY_FILTER_USE_BOTH);
+                $client->trialBalance()->where('work_point_id', $p['id'])->update($filtered);
+            } else {
+                $p['work_point_id'] = $p['id'];
+                if (substr($p['id'], 0, 4) == 'null') {
+                    if (!empty($p['number']) && !empty($p['name'])) {
+                        $temp = \App\WorkPoint::create($p);
+                        $p['work_point_id'] = $temp->id;
+                        $p['name'] = '';
+                        $client->trialBalance()->create($p);
+                    } else {
+                        $error = true;
+                    }
+                } else {
+                    $p['name'] = '';
+                    $client->trialBalance()->create($p);
+                }
+            }
+        }
+
+        $wps = \App\WorkPoint::whereIn('id', $ids)->get();
+
+        print_r($wps);
+        
+        foreach ($wps as $wp) {
+            if ($wp->initial == 0)
+                $wp->delete();
+            $client->trialBalance()->where('work_point_id', $wp->id)->delete();
+        }
+
+        if ($error)
+            return response()->json(['saved' => false]);
+
+        return response()->json(['saved' => true]);
+    }
+
     public function edit($id) {
 
         $msg = ['status' => 'nothing'];
@@ -147,7 +213,7 @@ class ClientController extends Controller {
             }
         }
 
-        return;
+        return response()->json(['saved' => true, 'client_id' => $client->id]);
 
         if ($msg['status'] == 'nothing')
             return redirect()->back()->with($msg)->withInput();
@@ -190,6 +256,7 @@ class ClientController extends Controller {
             'company_address' => 'required|max:191',
             'company_register_number' => 'required|numeric',
             'company_register_expiration' => 'required|date_format:Y-m-d',
+            'company_financial_year' => 'required|date_format:Y-m-d',
             'company_apparent_capital' => 'required|numeric',
             'company_money_capital' => 'required|numeric',
             'company_total_capital' => 'required|numeric',
@@ -219,6 +286,7 @@ class ClientController extends Controller {
             'company_address.required' => 'يجب ادخال عنوان الشركة',
             'company_register_number.required' => 'يجب ادخال رقم السجل التجارى',
             'company_register_expiration.required' => 'يجب ادخال تاريخ انتهاء السجل التجارى',
+            'company_financial_year.required' => 'يجب ادخال تاريخ السنه الماليه',
             'company_apparent_capital.required' => 'يجب ادخال رأس المال العينى',
             'company_money_capital.required' => 'يجب ادخال رأس المال النقدى',
             'company_total_capital.required' => 'يجب ادخال اجمالى رأس المال',
@@ -250,6 +318,7 @@ class ClientController extends Controller {
             'auds.*.fax.digits_between' => '(المراجعين) رقم الفاكس يجب أن يكون رقم صحيح بين 8 الى 15 رقم',
             //custom
             'company_register_expiration.date_format' => 'تاريخ انتهاء السجل غير صحيح',
+            'company_financial_year.date_format' => 'تاريخ السنه الماليه غير صحيح',
             'company_email.*.data.email' => 'أدخل البريد الالكترونى بشكل صحيح',
             'partners.*.email' => '(الشركاء) أدخل البريد الالكترونى بشكل صحيح',
             'partners.*.percentage' => '(الشركاء) نسبة رأس المال يجب أن تكون رقم',

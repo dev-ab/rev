@@ -47,6 +47,8 @@ Route::get('/group/delete/{id}', 'GroupController@delete');
 //Client management
 Route::get('/client', 'ClientController@index');
 Route::get('/client/create', 'ClientController@create');
+Route::get('/client/{id}/balance', 'ClientController@balance');
+Route::post('/client/{id}/balance/save', 'ClientController@balanceSave');
 Route::get('/client/edit/{id}', 'ClientController@edit');
 Route::post('/client/save', 'ClientController@save');
 Route::get('/client/delete/{id}', 'ClientController@delete');

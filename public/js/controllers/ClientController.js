@@ -138,6 +138,7 @@ app.controller('ClientController', ['$scope', '$compile', '$window', function ($
                     console.log(data);
                     $scope.processing = false;
                     $scope.success = true;
+                    $scope.id = data.client_id;
                     $scope.$apply();
                     $('html, body').animate({
                         scrollTop: $("#success").offset().top

@@ -15,6 +15,7 @@ class Client extends Model {
         'company_apparent_capital',
         'company_money_capital',
         'company_total_capital',
+        'company_financial_year',
         'company_type',
         'company_zakkat',
         'manager_id'
@@ -39,6 +40,10 @@ class Client extends Model {
 
     public function auditors() {
         return $this->hasMany('App\Auditor');
+    }
+
+    public function trialBalance() {
+        return $this->hasMany('App\TrialBalance');
     }
 
 }

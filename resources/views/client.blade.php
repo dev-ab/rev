@@ -71,15 +71,25 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group form-group-default">
+                                            <div class="form-group form-group-default required">
                                                 <label>نشاط الشركة</label>
                                                 <input name='company_activity' ng-value='client.company_activity' type="text" class="form-control">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group form-group-default ">
-                                        <label>عنوان الشركة</label>
-                                        <input name='company_address' ng-value='client.company_address' type="text" class="form-control">
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            <div class="form-group form-group-default required">
+                                                <label>عنوان الشركة</label>
+                                                <input name='company_address' ng-value='client.company_address' type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-group-default required">
+                                                <label>تاريخ السنه الماليه</label>
+                                                <input name='company_financial_year' ng-value='client.company_financial_year' type="text" class="form-control datepicker">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <br>
@@ -87,13 +97,13 @@
                                 <div class="form-group-attached">
                                     <div class="row clearfix">
                                         <div class="col-sm-6">
-                                            <div class="form-group form-group-default ">
+                                            <div class="form-group form-group-default required">
                                                 <label>رقم السجل التجارى </label>
                                                 <input name='company_register_number' ng-value='client.company_register_number' type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group form-group-default">
+                                            <div class="form-group form-group-default required">
                                                 <label>تاريخ الانتهاء</label>
                                                 <input name='company_register_expiration' ng-value="client.company_register_expiration" type="text" class="form-control datepicker">
                                             </div>
@@ -112,13 +122,13 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group form-group-default">
+                                            <div class="form-group form-group-default required">
                                                 <label>رأس المال النقدى</label>
                                                 <input name='company_money_capital' ng-value="client.company_money_capital" type="text" class="form-control">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group form-group-default">
+                                    <div class="form-group form-group-default required">
                                         <label>إجمالى رأس المال</label>
                                         <input name='company_total_capital' ng-value="client.company_total_capital" type="text" class="form-control">
                                     </div>
@@ -128,7 +138,7 @@
                                 <div class="form-group-attached">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="form-group form-group-default">
+                                            <div class="form-group form-group-default required">
                                                 <select name='company_type' class="form-control">
                                                     <option value="">نوع الشركة / المؤسسة</option>
                                                     <option ng-selected="client.company_type == 'individual'" value="individual">مؤسسة فردية</option>
@@ -143,7 +153,7 @@
                                             <div class="form-group-attached">
                                                 <div class="row">
                                                     <div class="col-sm-12">
-                                                        <div class="form-group form-group-default">
+                                                        <div class="form-group form-group-default required">
                                                             <select name='company_zakkat' class="form-control">
                                                                 <option value="">نوع المعاملة الزكوية</option>
                                                                 <option ng-selected="client.company_zakkat == 'zakkat'" value="zakkat">زكاة</option>
@@ -163,7 +173,7 @@
                                 <div class="form-group-attached">
                                     <div class="row clearfix">
                                         <div class="col-sm-3">
-                                            <div class="form-group form-group-default" ng-repeat="phone in company_phones">
+                                            <div class="form-group form-group-default required" ng-repeat="phone in company_phones">
                                                 <label>رقم الهاتف  <span ng-if="$index > 0" ng-bind="$index + 1"></span></label>
                                                 <input name="company_phone[@{{$index}}][id]" type="hidden" ng-value="phone.id">
                                                 <input name="company_phone[@{{$index}}][type]" type="hidden" value="phone">
@@ -183,7 +193,7 @@
                                             <button ng-click="rmContact('fax')" ng-if="company_faxes.length > 1" class="btn btn-danger btn-cons m-b-10 delContact" type="button" style="min-width:auto;"><i class="pg-minus"></i> </button>
                                         </div>
                                         <div class="col-sm-3">
-                                            <div class="form-group form-group-default" ng-repeat="email in company_emails">
+                                            <div class="form-group form-group-default required" ng-repeat="email in company_emails">
                                                 <label>بريد اليكترونى  <span ng-if="$index > 0" ng-bind="$index + 1"></span></label>
                                                 <input name="company_email[@{{$index}}][id]" type="hidden" ng-value="email.id">
                                                 <input name="company_email[@{{$index}}][type]" type="hidden" value="email">
@@ -414,7 +424,7 @@
                                 </h3>
                                 <p class="text-white">تم إنشاء ملف للعميل فى قاعدة بيانات العملاء وإضافة الجزء الاول <span class="bold"> البيانات القانونية
                                     </span></p>
-                                <button class="btn btn-default btn-cons hide">إستكمال البيانات المالية</button>
+                                <a ng-href="{{url('/client')}}/@{{id}}/balance" class="btn btn-default btn-cons">إستكمال البيانات المالية</a>
                             </div>
                             <div ng-if="client">
                                 <h3 class="text-white">

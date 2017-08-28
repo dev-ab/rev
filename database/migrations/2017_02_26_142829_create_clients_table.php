@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration {
             $table->string('company_name');
             $table->string('company_activity');
             $table->string('company_address');
+            $table->date('company_financial_year');
             $table->string('company_register_number');
             $table->date('company_register_expiration');
             $table->string('company_apparent_capital');

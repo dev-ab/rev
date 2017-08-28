@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/rev/database/seeds/InitSeeder.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/TrialBalance.php</file>
+            <file>file:/C:/xampp/htdocs/rev/public/js/controllers/BalanceController.js</file>
             <file>file:/C:/xampp/htdocs/rev/routes/web.php</file>
-            <file>file:/C:/xampp/htdocs/rev/yasser_auditing/03_audit_program_create.html</file>
-            <file>file:/C:/xampp/htdocs/rev/resources/views/program-preview.blade.php</file>
-            <file>file:/C:/xampp/htdocs/rev/app/Http/Controllers/ProgramController.php</file>
-            <file>file:/C:/xampp/htdocs/rev/resources/views/program.blade.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/Http/Controllers/ClientController.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/WorkPoint.php</file>
+            <file>file:/C:/xampp/htdocs/rev/resources/views/balance.blade.php</file>
+            <file>file:/C:/xampp/htdocs/rev/app/Client.php</file>
+            <file>file:/C:/xampp/htdocs/rev/public/js/switchDir.js</file>
         </group>
     </open-files>
 </project-private>
